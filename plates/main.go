@@ -35,15 +35,7 @@ func main(){
 		}
 
 		if arg_plates.isEmpty() { // TODO const default, defino globally so more readable
-			cw.availablePlates = PlateSet_t{
-					1.25:  2,
-					2.5:  2,
-					5.0:  2,
-					10.0: 2,
-					15.0: 2,
-					20.0: 2,
-					25.0: 6,
-			}
+			cw.availablePlates = PlateSet_t(defaultPlateSet)
 		} else {
 			cw.availablePlates = PlateSet_t(arg_plates)
 		}
@@ -51,9 +43,12 @@ func main(){
 	}
 
 	selezione := cw.GreedyPlatesSelector(weight)
+	plate_sum := PlatesSum(selezione)
+	calculated_weigth := plate_sum + cw.bar + cw.collars
+
 	fmt.Println("Selected plates:", selezione)
 
-	fmt.Printf("\tExpected weight: %.2f\n", weight)
+	fmt.Printf("\nWeight: %.2f/%.2f\n", calculated_weigth, weight)
 	fmt.Printf("\tPlates weight: %.2f\n", PlatesSum(selezione))
 	if cw.bar != 0 {
 		fmt.Printf("\tbar weight: %.2f\n", cw.bar)

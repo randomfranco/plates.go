@@ -17,6 +17,17 @@ type ComplessiveWeight struct {
 	availablePlates PlateSet_t
 }
 
+// Defined to work in a greedy fashion
+var defaultPlateSet = PlateSet_t{
+	1.25:  2,
+	2.5:  2,
+	5.0:  2,
+	10.0: 2,
+	15.0: 2,
+	20.0: 2,
+	25.0: 20,
+}
+
 type ArgPlates PlateSet_t
 
 // Satisfy flag.Value interface
