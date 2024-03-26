@@ -2,16 +2,9 @@ package main
 
 import "sort"
 
-// ComplessiveWeight is a struct containing the weight of the barbell and a map[float64]int of plates, in the map the weight is the key and the value is how many plates you got
-type ComplessiveWeight struct {
-	bar float64
-	// collars weight (full weight of the pairs, ex 5kg)
-	collars float64
-	availablePlates map[float64]int
-}
 
 // sort the keys of the plates map in order to iterate them from bigger to smaller in a greedy fashion
-func sortPlates(Plates map[float64]int) []float64{
+func sortPlates(Plates PlateSet_t) []float64{
 	keys := make([]float64, 0, len(Plates))
 	for k := range Plates {
 		keys = append(keys, k)
@@ -24,9 +17,9 @@ func sortPlates(Plates map[float64]int) []float64{
 }
 
 // greedy algorithm to select the right amount of weights
-func (cw ComplessiveWeight) GreedyPlatesSelector(weight float64) map[float64]int{
+func (cw ComplessiveWeight) GreedyPlatesSelector(weight float64) PlateSet_t{
 
-	plates := make(map[float64]int)
+	plates := make(PlateSet_t)
 	sortedPlates := sortPlates(cw.availablePlates)
 
 	// set current weight to bar and only account for plate couples
@@ -44,7 +37,7 @@ func (cw ComplessiveWeight) GreedyPlatesSelector(weight float64) map[float64]int
 }
 
 // sum of the weights take map[float]int and return float64
-func PlatesSum(plates map[float64]int) float64{
+func PlatesSum(plates PlateSet_t) float64{
 
 	sum := 0.0
 

@@ -13,7 +13,7 @@ func (cw *ComplessiveWeight) LoadPlatesJSON(filename string) error {
 	// json keys must be string
 	var helper map[string]interface{}
 	// init map
-	cw.availablePlates = make(map[float64]int)
+	cw.availablePlates = make(PlateSet_t)
 
 
 	fileContent, err := ioutil.ReadFile(filename)
